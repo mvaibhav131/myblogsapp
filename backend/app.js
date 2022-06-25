@@ -14,7 +14,7 @@ app.use("/user",router);
 app.use("/blogs",blogrouter)
 
 mongoose.connect("mongodb://localhost:27017/Blog")
-.then(()=> app.listen("5000"))
+.then(()=> app.listen(5000))
 .then(()=>console.log("conn to 5000"))
 .catch((err)=>console.log(err))
 
