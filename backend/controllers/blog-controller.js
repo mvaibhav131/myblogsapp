@@ -8,7 +8,7 @@ export const getAllBlogs = async (req,res,next)=>{
         // blogs=await Blog.find().populate('user');
 
     }catch(err){
-        console.log(err);
+      return console.log(err);
     }
     if(!blogs){
         return res.status(404).json({messaage:"No Blogs Found"});

@@ -1,4 +1,5 @@
 import User from "../models/User";
+import bcrypt from "bcryptjs"
 
 export const getAllUser = async (req,res,next)=>{
     let users;
@@ -24,10 +25,11 @@ export const signup=async (req,res,next)=>{
      if(existingUser){
         return res.status(400).json({message:"User Already exist"})
      }
+     const hashedPassword=bcrypt.hashSync(password);
      const user=new User({
         name,
         email,
-        password,
+        password:hashedPassword,
         blogs:[],
      });
      try{
@@ -50,8 +52,9 @@ export const login=async (req,res,next)=>{
         return res.status(404).json({message:"Couldn't find user"});
      }
 
-     const ispasswordcorrect=await User.findOne({password});
-     if(!ispasswordcorrect){
+    //  const ispasswordcorrect=await User.findOne({password});
+    const isPasswordCorrect=bcrypt.compareSync(password,existingUser.password);
+     if(!isPasswordCorrect){
         return res.status(400).json({message:"Incorrect Password"});
 
      }

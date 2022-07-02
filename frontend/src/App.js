@@ -8,7 +8,10 @@ import Blogs from './components/Blogs';
 import UserBlogs from './components/UserBlogs';
 import BlogDetail from './components/BlogDetail';
 import AddBlog from './components/AddBlog';
+import { useSelector } from 'react-redux';
 function App() {
+  const isLogin= useSelector((state)=>state.isLogin);
+  console.log(isLogin)
   return (
     <>
     <Header/>
@@ -20,7 +23,7 @@ function App() {
         <Route path="/myBlogs/:id" element={<BlogDetail/>}/>
         <Route path="/blogs/add" element={<AddBlog/>}/>
         <Route path="/auth" element={<Auth/>}/>
-      </Routes>
+        </Routes>
     </div>
     </>
   );
